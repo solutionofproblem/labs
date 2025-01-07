@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск K-той цифры</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            width: 200px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .input-array {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+        #arrayResult {
+            margin-top: 20px;
+            font-size: 18px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>Поиск K-той цифры в последовательности</h2>
+            <p>Введите число k (от 1 до 300):</p>
+            <input type="number" id="kInput" min="1" max="300">
+            <button onclick="findKthDigit()">Найти цифру</button>
+            <div id="result"></div>
+        </div>
+
+        <div class="section">
+            <h2>Обработка массива чисел</h2>
+            <p>Введите числа через пробел:</p>
+            <input type="text" id="arrayInput" class="input-array" 
+                   placeholder="Например: 1.5 -2.3 3.7 4.2">
+            <button onclick="processArray()">Вычислить сумму</button>
+            <button onclick="removeSpecialNumbers()">Удалить особые числа</button>
+            <div id="arrayResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Проверка массива слов</h2>
+            <p>Введите слова через пробел:</p>
+            <input type="text" id="wordsInput" class="input-array" 
+                   placeholder="Например: кот такси игра арбуз">
+            <button onclick="checkWords()">Проверить слова</button>
+            <div id="wordsResult"></div>
+        </div>
+    </div>
+
+    <script>
+        function findKthDigit() {
+            const k = parseInt(document.getElementById('kInput').value);
+            
+            // Проверка входных данных
+            if (!k || k < 1 || k > 300) {
+                document.getElementById('result').innerHTML = 
+                    'Пожалуйста, введите число от 1 до 300';
+                return;
+            }
+
+            // Формируем строку последовательности
+            let sequence = '';
+            for (let i = 100; i < 200; i++) {
+                sequence += i.toString();
+            }
+
+            // Получаем k-ю цифру
+            const digit = sequence[k-1];
+            
+            document.getElementById('result').innerHTML = 
+                `${k}-я цифра в последовательности: ${digit}`;
+        }
+
+        function processArray() {
+            // Получаем строку с числами и разбиваем её на массив
+            const input = document.getElementById('arrayInput').value;
+            const numbers = input.trim().split(/\s+/).map(Number);
+            
+            // Проверка на корректность ввода
+            if (numbers.some(isNaN)) {
+                document.getElementById('arrayResult').innerHTML = 
+                    'Ошибка: Введите корректные числа, разделенные пробелами';
+                return;
+            }
+
+            // Находим первый элемент, где cos(x) > 0
+            let startIndex = numbers.findIndex(x => Math.cos(x) > 0);
+            
+            if (startIndex === -1) {
+                document.getElementById('arrayResult').innerHTML = 
+                    'В массиве нет элементов, косинус которых положителен';
+                return;
+            }
+
+            // Вычисляем сумму элементов от найденного индекса до конца
+            const sum = numbers.slice(startIndex)
+                             .reduce((acc, curr) => acc + curr, 0);
+
+            // Формируем подробный вывод
+            let result = `Первое число с положительным косинусом: ${numbers[startIndex]}\n`;
+            result += `Индекс этого числа: ${startIndex}\n`;
+            result += `Сумма элементов от индекса ${startIndex} до конца: ${sum.toFixed(2)}`;
+            
+            document.getElementById('arrayResult').innerHTML = result;
+        }
+
+        function isArithmeticProgression(num) {
+            // Получаем только цифры числа
+            const digits = Math.abs(Math.floor(num))
+                              .toString()
+                              .split('')
+                              .map(Number);
+            
+            if (digits.length < 2) return false;
+            
+            // Проверяем, образуют ли цифры арифметическую прогрессию
+            const difference = digits[1] - digits[0];
+            
+            for (let i = 1; i < digits.length; i++) {
+                if (digits[i] - digits[i-1] !== difference) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        function removeSpecialNumbers() {
+            // Получаем строку с числами и разбиваем её на массив
+            const input = document.getElementById('arrayInput').value;
+            const numbers = input.trim().split(/\s+/).map(Number);
+            
+            // Проверка на корректность ввода
+            if (numbers.some(isNaN)) {
+                document.getElementById('arrayResult').innerHTML = 
+                    'Ошибка: Введите корректные числа, разделенные пробелами';
+                return;
+            }
+
+            // Фильтруем массив
+            const filteredNumbers = numbers.filter(num => {
+                const integerPart = Math.abs(Math.floor(num));
+                return !(integerPart === 7 && isArithmeticProgression(num));
+            });
+
+            // Формируем вывод
+            let result = 'Исходный массив: ' + numbers.join(', ') + '\n';
+            result += 'Массив после удаления: ' + filteredNumbers.join(', ') + '\n';
+            result += 'Удалено элементов: ' + (numbers.length - filteredNumbers.length);
+            
+            document.getElementById('arrayResult').innerHTML = result;
+        }
+
+        function checkWords() {
+            // Получаем строку со словами и разбиваем её на массив
+            const input = document.getElementById('wordsInput').value;
+            const words = input.trim().toLowerCase().split(/\s+/);
+            
+            // Проверка на пустой ввод
+            if (words.length < 2) {
+                document.getElementById('wordsResult').innerHTML = 
+                    'Введите как минимум два слова';
+                return;
+            }
+
+            // Проверяем условие для каждого слова
+            let isValid = true;
+            let firstMismatch = '';
+            
+            for (let i = 1; i < words.length; i++) {
+                const prevWord = words[i-1];
+                const currentWord = words[i];
+                
+                if (prevWord.charAt(prevWord.length - 1) !== currentWord.charAt(0)) {
+                    isValid = false;
+                    firstMismatch = `${prevWord} → ${currentWord}`;
+                    break;
+                }
+            }
+
+            // Формируем вывод
+            let result = 'Введенные слова: ' + words.join(', ') + '\n';
+            if (isValid) {
+                result += 'Условие выполняется: первая буква каждого слова совпадает с последней буквой предыдущего слова';
+            } else {
+                result += 'Условие не выполняется\n';
+                result += 'Первое несовпадение: ' + firstMismatch;
+            }
+            
+            document.getElementById('wordsResult').innerHTML = result;
+        }
+    </script>
+</body>
+</html> 
