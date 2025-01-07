@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация брака</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script> <!-- Подключение JavaScript файла -->
+
+</head>
+<bo dy>
+    <div class="container">
+        <h1>Заявление на регистрацию брака</h1>
+        <form class="marriage-form" action="#" method="POST" onsubmit="validateForm(event)">
+            <!-- Данные первого супруга -->
+            <fieldset>
+                <legend>Данные первого супруга</legend>
+                
+                <div class="form-group">
+                    <label for="name1">ФИО</label>
+                    <input type="text" id="name1" name="name1" placeholder="Введите ФИО" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birth1">Дата рождения</label>
+                    <input type="date" id="birth1" name="birth1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="passport1">Серия и номер паспорта</label>
+                    <input type="text" id="passport1" name="passport1" pattern="\d{4}\s?\d{6}" placeholder="0000 000000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone1">Номер телефона</label>
+                    <input type="tel" id="phone1" name="phone1" placeholder="+79000000000" required>
+                </div>
+            </fieldset>
+
+            <!-- Данные второго супруга -->
+            <fieldset>
+                <legend>Данные второго супруга</legend>
+                
+                <div class="form-group">
+                    <label for="name2">ФИО</label>
+                    <input type="text" id="name2" name="name2" placeholder="Введите ФИО" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birth2">Дата рождения</label>
+                    <input type="date" id="birth2" name="birth2" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="passport2">Серия и номер паспорта</label>
+                    <input type="text" id="passport2" name="passport2" pattern="\d{4}\s?\d{6}" placeholder="0000 000000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone2">Номер телефона</label>
+                    <input type="tel" id="phone2" name="phone2" placeholder="+79000000000" required>
+                </div>
+            </fieldset>
+
+            <!-- Данные о регистрации -->
+            <fieldset>
+                <legend>Данные о регистрации</legend>
+
+                <div class="form-group">
+                    <label for="wedding-date">Желаемая дата регистрации</label>
+                    <input type="datetime-local" id="wedding-date" name="wedding-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="venue">Место регистрации</label>
+                    <select id="venue" name="venue" required>
+                        <option value="">Выберите ЗАГС</option>
+                        <option value="zags1">ЗАГС №1</option>
+                        <option value="zags2">ЗАГС №2</option>
+                        <option value="zags3">ЗАГС №3</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Торжественная церемония:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="ceremony-yes" name="ceremony" value="yes">
+                        <label for="ceremony-yes">Да</label>
+                        <input type="radio" id="ceremony-no" name="ceremony" value="no">
+                        <label for="ceremony-no">Нет</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Дополнительные пожелания</label>
+                    <textarea id="comments" name="comments" rows="4"></textarea>
+                </div>
+            </fieldset>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="agreement" name="agreement" required>
+                <label for="agreement">Я согласен на обработку персональных данных</label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">Отправить заявление</button>
+                <button type="reset">Очистить форму</button>
+            </div>
+        </form>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-output"></div>
+        </div>
+    </div>
+</body>
+</html> 
