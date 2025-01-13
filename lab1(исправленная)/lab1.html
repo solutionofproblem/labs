@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторная работа 1</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Подключаем локальный шрифт -->
+    <style>
+        @font-face {
+            font-family: 'CustomHeader';
+            src: url('fonts/Roboto-Bold.woff2') format('woff2'),
+                 url('fonts/Roboto-Bold.woff') format('woff');
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Язык программирования Ruby</h1>
+        <nav>
+            <ul>
+                <li><a href="#history">История создания</a></li>
+                <li><a href="#overview">Краткий обзор языка</a></li>
+                <li><a href="#examples">Примеры кода</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="history">
+        <h2>История создания</h2>
+        <p>Ruby был создан в середине 1990-х годов японским программистом Юкихиро Мацумото...</p>
+        <img src="history.png" alt="История Ruby" id="history-image">
+    </section>
+
+    <section id="overview">
+        <h2>Краткий обзор языка</h2>
+        <p>Ruby — это динамический, рефлексивный, интерпретируемый язык программирования...</p>
+        <img src="overview.jpg" alt="Обзор Ruby" id="overview-image">
+
+    <section id="examples">
+        <h2>Примеры кода</h2>
+        <pre><code class="ruby">
+# Пример простого кода на Ruby
+def hello_world
+  puts 'Hello, world!'
+end
+
+hello_world
+        </code></pre>
+        <img src="code_example.jpg" alt="Пример кода" id="code-example-image">
+    </section>
+
+    <section>
+        <h2>Таблица сравнения</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Язык</th>
+                    <th>Год создания</th>
+                    <th>Автор</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ruby</td>
+                    <td>1995</td>
+                    <td>Юкихиро Мацумото</td>
+                </tr>
+                <tr>
+                    <td>Python</td>
+                    <td>1991</td>
+                    <td>Гвидо ван Россум</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Списки</h2>
+        <ol>
+            <li>Первый элемент</li>
+            <li>Второй элемент</li>
+        </ol>
+        <ul>
+            <li>Элемент списка</li>
+            <li>Элемент списка</li>
+        </ul>
+        <ul style="list-style-image: url('bullet.png');">
+            <li>Элемент с изображением</li>
+            <li>Элемент с изображением</li>
+        </ul>
+    </section>
+
+    <footer>
+        <h2>Использованные теги и CSS-свойства</h2>
+        <p>Теги: &lt;html&gt;, &lt;head&gt;, &lt;title&gt;, &lt;link&gt;, &lt;body&gt;, &lt;header&gt;, &lt;nav&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;a&gt;, &lt;section&gt;, &lt;h1&gt;, &lt;h2&gt;, &lt;p&gt;, &lt;img&gt;, &lt;pre&gt;, &lt;code&gt;, &lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;, &lt;ol&gt;, &lt;footer&gt;</p>
+        <p>CSS-свойства: font-size, font-family, color, background-color, margin, padding, float, display, text-align, list-style-image, border, width, height, etc.</p>
+    </footer>
+
+    <!-- Добавляем внутренние и внешние ссылки -->
+    <nav>
+        <a href="#code-examples">Перейти к примерам кода</a>
+        <a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a>
+    </nav>
+
+    <!-- Раздел с примерами кода -->
+    <section id="code-examples">
+        <h2>Примеры кода</h2>
+        <pre class="code-highlight">
+            <code>
+function example() {
+    let greeting = "Hello, World!";
+    console.log(greeting);
+}
+
+.class-example {
+    color: #333;
+    padding: 15px;
+}
+            </code>
+        </pre>
+    </section>
+</body>
+</html>
